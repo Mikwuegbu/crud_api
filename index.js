@@ -1,5 +1,8 @@
 const express = require('express'); // use express library
 const mongoose = require('mongoose'); // connect to MongoDb
+require('dotenv').config();
+
+const connectionString = process.env.DATABASE_URL;
 
 const app = express();
 
@@ -10,9 +13,7 @@ app.get('/', (req, res) => {
 
 // Connect to MongoDB & listen on port 3000
 mongoose
-	.connect(
-		'mongodb+srv://admin:admin@backenddb.s4y5p.mongodb.net/Node-Api?retryWrites=true&w=majority&appName=BackendDB'
-	)
+	.connect(connectionString)
 	.then(() => {
 		console.log('Connected to the Database');
 		app.listen(3000, () => {
